@@ -128,24 +128,17 @@ func (event *GithubEvent) HumanString() string {
 	return "Unknown event"
 }
 
+// some struct below are incomplete because we don't need these data for current task
+
 type PushEvent struct {
-	RepositoryId int    `json:"repository_id,omitempty"`
-	PushId       int    `json:"push_id,omitempty"`
-	Size         int    `json:"size,omitempty"`
-	DistinctSize int    `json:"distinct_size,omitempty"`
-	Ref          string `json:"ref,omitempty"`
-	Head         string `json:"head,omitempty"`
-	Before       string `json:"before,omitempty"`
-	Commits      []struct {
-		Sha     string `json:"sha,omitempty"`
-		Message string `json:"message,omitempty"`
-		Author  struct {
-			Name  string `json:"name,omitempty"`
-			Email string `json:"email,omitempty"`
-		} `json:"author"`
-		Url      string `json:"url,omitempty"`
-		Distinct bool   `json:"distinct,omitempty"`
-	} `json:"commits,omitempty" json:"commits,omitempty"`
+	RepositoryId int           `json:"repository_id,omitempty"`
+	PushId       int           `json:"push_id,omitempty"`
+	Size         int           `json:"size,omitempty"`
+	DistinctSize int           `json:"distinct_size,omitempty"`
+	Ref          string        `json:"ref,omitempty"`
+	Head         string        `json:"head,omitempty"`
+	Before       string        `json:"before,omitempty"`
+	Commits      []interface{} `json:"commits,omitempty" json:"commits,omitempty"`
 }
 
 type PullRequestReviewThreadEvent struct {
