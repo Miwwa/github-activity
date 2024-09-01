@@ -31,7 +31,7 @@ func run(args []string) ([]string, error) {
 	}
 	lines := make([]string, 0, len(events))
 	for _, event := range events {
-		lines = append(lines, event.HumanString())
+		lines = append(lines, "- "+event.HumanString())
 	}
 	return lines, nil
 }
