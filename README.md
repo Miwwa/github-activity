@@ -15,7 +15,7 @@ cd github-activity-fetcher
 
 2. Build the Project
 ```bash
-go build -o github-activity
+go build
 ```
 
 3. Run the CLI

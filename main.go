@@ -29,6 +29,9 @@ func run(args []string) ([]string, error) {
 	if err != nil {
 		return []string{}, err
 	}
+	if len(events) == 0 {
+		return []string{"user don't have recent activities"}, nil
+	}
 	lines := make([]string, 0, len(events))
 	for _, event := range events {
 		lines = append(lines, "- "+event.HumanString())
@@ -45,7 +48,10 @@ func fetchApi(username string) ([]GithubEvent, error) {
 	defer response.Body.Close()
 
 	if response.StatusCode != 200 {
-		return []GithubEvent{}, fmt.Errorf("GitHub API error: %d %s", response.StatusCode, response.Status)
+		if response.StatusCode == 404 {
+			return []GithubEvent{}, fmt.Errorf("user not found: %s", username)
+		}
+		return []GithubEvent{}, fmt.Errorf("GitHub API error: %s", response.Status)
 	}
 	var events []GithubEvent
 	err = json.NewDecoder(response.Body).Decode(&events)
